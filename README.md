@@ -1,5 +1,33 @@
 [![Build Status](https://travis-ci.org/crawl/crawl.svg?branch=master)](https://travis-ci.org/crawl/crawl)
 
+
+# How to compile this PIECE OF SHIT
+### It is happening again
+
+I forked, and made a new main branch with the contents of 0.19.6
+Note that this should be run from inside WSL (Ubuntu 20.04 in my case). ⚠️⚠️⚠️NEVER⚠️⚠️⚠️ attempt to compile c++ code on windows.
+If starting from an old branch, edit .git/config and replace git with https in all submodule URLs.
+then cd into the source directory and run: 
+```bash
+git submodule update
+sudo apt update
+sudo apt install libpng-dev zlib1g-dev libsdl2-dev libfreetype-dev libsdl2-image-dev
+make clean
+make TILES=y LDFLAGS="-lpng -lz" -j4
+```
+And it works. You can run this from within wsl if you install xming or some other x server on windows.
+You could also compile it without the TILE flag and play in the terminal.
+
+Cross-compiling for windows:
+```bash
+sudo apt-get install mingw-w64
+make clean
+make CROSSHOST=x86_64-w64-mingw32 TILES=y LDFLAGS="-lpng -lz" -j4
+```
+Then you can run crawl.exe from windows.
+
+Okay here's the original readme:
+
 # Dungeon Crawl Stone Soup
 
 Dungeon Crawl Stone Soup is a game of dungeon exploration, combat and magic, involving characters of diverse skills, worshipping deities of great power and caprice. To win, you'll need to be a master of tactics and strategy, and prevail against overwhelming odds.
